@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="/" class="logo">3@mеHiтељ</a>
+        </div>
+        <div class="nav">
+            <a href="#editor">Редактор</a>
+            <a href="#builder">Шаблоны</a>
+            <a href="#symbols">Символы</a>
+        </div>
+    </div>
+    <div id="app" class="app">
+        <div class="block editor" id="editor">
+            <div class="block editor-header">
+                <div class="row">
+                    <label>Проект:
+                        <input type="text" list="storage-list" id="storage-name">
+                    </label>
+                    <button class="btn" onclick="getFromLockalStorage()">Загрузить</button>
+                    <button class="btn" onclick="addToLockalStorage()">Сохранить</button>
+                    <button class="btn" onclick="refreshApp()">Обновить</button>
+                    <button class="btn" onclick="removeFromStorage()">Удалить</button>
+                    <button class="btn" onclick="localStorage.clear()">Удалить всё</button>
+                    <datalist id="storage-list"></datalist>
+                </div>
+                <div class="row">
+                    <label>Шрифт:
+                        <select name="font" class="editor-ff">
+                            <option value="Arial, sans-serif">sans-serif</option>
+                            <option value="Noto Serif, serif">serif</option>
+                            <option value="Abril Fatface, cursive">display</option>
+                            <option value="Allura, cursive">handwriting</option>
+                            <option value="Source Code Pro, monospace">monospace</option>
+                        </select>
+                    </label>
+                    <label>
+                        <input type="number" name="font-size" class="editor-fz" value="18" min="6" max="52">px
+                    </label>
+                    <span> | </span>
+                    <label class="editor-view">
+                        <input class="editor-checkbox" type="checkbox" checked>
+                        <span>редактор</span>
+                    </label>
+                    <button class="btn" onclick="openModal(document.querySelector('#editor-result').innerHTML)">просмотр</button>
+                </div>
+            </div>
+            <div class="editor-body">
+                <textarea name="editor-textarea" id="editor-textarea" class="editor-textarea" spellcheck="false">a b c d e f g h i j k l m n o p q r s t u v w x y z
+а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я
+                </textarea>
+                <div class="editor-text editor-preview d-none" id="editor-preview"></div>
+                
+                <div class="editor-text editor-result" id="editor-result"></div>
+            </div>
+        </div>
+        <div class="block builder" id="builder">
+            <div class="block builder-header">
+                <div class="row">
+                    <button class="btn" onclick="refreshApp()">Применить</button>
+                    <button class="btn" onclick="addToStartBuilderForm()">Добавить</button>
+                    <button class="btn" onclick="clearBuilder()">Удалить всё</button>
+                </div>
+            </div>
+            <div class="builder-body">
+                <div class="builder-form builder-lastchild">
+                    <button type="button" title="добавить" onclick="addToEndBuilderForm(this)">+1</button>
+                </div>
+            </div>
+            <div class="builder-footer">
+                <div class="code-header">
+                    <button class="btn" onclick="generateCode()">код массив</button>
+                    <button class="btn" onclick="generateCode(1)">код javascript</button>
+                    <button class="btn" onclick="copyCode()">копировать</button>
+                    <button class="btn" onclick="removeCode()">очистить</button>
+                </div>
+                <div class="code-body">
+                    <code class="code d-none"></code>
+                </div>
+            </div>
+        </div>
+        <div class="block symbols" id="symbols">
+            <div class="symbols-set"></div>  
+        </div>
+    </div>
+    <div class="footer"></div>
+
+    <div class="modal d-none" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="btn btn-close" onclick="closeModal()">закрыть Х</button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+    <div class="modal-background d-none"></div>
+
+    <script src="abcs.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>
